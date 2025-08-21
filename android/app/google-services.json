@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "281102717393",
+    "project_id": "mini-wheelz",
+    "storage_bucket": "mini-wheelz.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281102717393:android:697cbcb31b17fb6c1d90f0",
+        "android_client_info": {
+          "package_name": "com.example.mini_wheelz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281102717393-9v3ek45lbii7i0i11p59lj87th2eh3mn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mini_wheelz",
+            "certificate_hash": "4a879c273cf2b99b5b469276bc6e2a860fda8d21"
+          }
+        },
+        {
+          "client_id": "281102717393-6d32p3jt2jmi0qciqd29uu41j65nh490.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfaNwBnn0bZHSipMHBg5B4IpENaseE2vY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281102717393-6d32p3jt2jmi0qciqd29uu41j65nh490.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "281102717393-ho23om4l2ljvvq7rf4lik0qv5on7l9gf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.miniWheelz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
