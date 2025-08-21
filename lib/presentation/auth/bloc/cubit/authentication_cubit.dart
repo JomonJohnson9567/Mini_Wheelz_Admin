@@ -33,6 +33,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final credential = await _auth.createUserWithEmailAndPassword(
         email: email,
+        
         password: password,
       );
 
