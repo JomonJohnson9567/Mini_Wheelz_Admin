@@ -102,10 +102,10 @@ class LoginPage extends StatelessWidget {
                     );
                   },
                 ),
+                const SizedBox(height: 16),
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, left: 220),
-                  child: Row(
+                Center(
+                  child: Column(
                     children: [
                       GestureDetector(
                         onTap: () {

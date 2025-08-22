@@ -5,6 +5,7 @@ import 'package:mini_wheelz/presentation/add_item/pages/add_option.dart';
 import 'package:mini_wheelz/presentation/home/pages/home.dart';
 import 'package:mini_wheelz/presentation/nottification/pages/notifications.dart';
 import 'package:mini_wheelz/presentation/order_history/pages/orders.dart';
+import 'package:mini_wheelz/presentation/product_view/product_viewpage.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:mini_wheelz/presentation/profile_page/page/profie_page.dart';
 import 'package:mini_wheelz/common/bottom_navbar/bloc/navigation_cubit.dart';
@@ -59,7 +60,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   List<Widget> _buildScreens() => [
     const HomePage(),
-    const OrdersPage(),
+    const ProductViewpage(),
     AddOptionsDialog(), // Placeholder for Add button (shows popup instead)
     const NotificationsPage(),
     Profilescreen(

@@ -31,7 +31,7 @@ class QuickStackItems extends StatelessWidget {
               // Categories Count
               Expanded(
                 child: buildStatCard(
-                  count: '12',
+                  count: '00',
                   label: 'Categories',
                   icon: Icons.category_rounded,
                   gradient: const LinearGradient(
@@ -46,7 +46,7 @@ class QuickStackItems extends StatelessWidget {
               // Products Count
               Expanded(
                 child: buildStatCard(
-                  count: '248',
+                  count: '00',
                   label: 'Products',
                   icon: Icons.inventory_2_rounded,
                   gradient: const LinearGradient(

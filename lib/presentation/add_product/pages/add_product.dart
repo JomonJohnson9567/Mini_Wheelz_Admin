@@ -17,46 +17,37 @@ class AddProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true, // very important
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 30),
+          // Adjust bottom padding dynamically when keyboard opens
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+          ),
           child: Form(
             key: addProductFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 40),
-                //Header Text
                 const HeaderText(title: 'Add Product'),
                 const SizedBox(height: 20),
-
-                // Image Grid Column
-                ImageGridColumn(),
+                const ImageGridColumn(),
                 const SizedBox(height: 10),
-
-                // Divider Widget
                 DividerWidget(color: AppColors.divider),
                 const SizedBox(height: 10),
-
-                // Product Price Widget
-                ProductPriceWidget(),
+                const ProductPriceWidget(),
                 const SizedBox(height: 10),
-
-                // Product Price and Quantity Widget
-                ProductPriceAndQTYWidget(),
+                const ProductPriceAndQTYWidget(),
                 const SizedBox(height: 10),
-
-                // Category Selection Widget
-                CategorySelectionWidget(),
+                const CategorySelectionWidget(),
                 const SizedBox(height: 20),
-
-                // Description Widget
-                DescriptionWidget(),
+                const DescriptionWidget(),
                 const SizedBox(height: 20),
-
-                //Button Widget
-                ButtonWidget(),
+                const ButtonWidget(),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_wheelz/presentation/order_history/pages/orders.dart';
 
 import 'package:mini_wheelz/presentation/profile_page/widgets/profile_menu_item.dart';
 import 'package:mini_wheelz/core/theme/app_colors.dart';
@@ -29,25 +30,13 @@ class ProfileMenuList extends StatelessWidget {
           icon: Icons.shopping_bag,
           title: 'Orders',
           onTap: () {
-            _showComingSoonSnackBar(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => OrdersPage()),
+            );
           },
         ),
         const SizedBox(height: 20),
-        // ProfileMenuItem(
-        //   icon: Icons.swap_horiz,
-        //   title: 'Switch Account',
-        //   onTap: () {
-        //     _showSwitchAccountDialog(context);
-        //   },
-        // ),
-        // ProfileMenuItem(
-        //   icon: Icons.power_settings_new,
-        //   title: 'Log out',
-        //   isLogout: true,
-        //   onTap: () {
-        //     context.read<AuthCubit>().signOut();
-        //   },
-        // ),
       ],
     );
   }
