@@ -25,7 +25,7 @@ class ProfileHeader extends StatelessWidget {
         CircleAvatar(
           radius: 60,
           backgroundColor: AppColors.surface,
-          backgroundImage: const AssetImage('assets/images/user.png'),
+          // backgroundImage: const AssetImage('assets/images/user.png'),
           child: BlocBuilder<AuthCubit, AuthState>(
             builder: (context, state) {
               String? photoUrl;

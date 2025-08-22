@@ -17,7 +17,7 @@ class Profilescreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background, // Dark theme background
       body: SafeArea(
-        child: SafeArea(
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -41,7 +41,7 @@ class Profilescreen extends StatelessWidget {
                 const SizedBox(height: 40),
 
                 // Menu Items List
-                const Expanded(child: ProfileMenuList()),
+                const ProfileMenuList(),
               ],
             ),
           ),

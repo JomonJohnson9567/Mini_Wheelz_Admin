@@ -23,6 +23,9 @@ class DescriptionField extends StatelessWidget {
         controller: controller,
         maxLines: 5,
         validator: validator,
+        scrollPadding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom + 100,
+        ),
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.whitecolor,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-//   SignUp controllers
+
+
 
 class TextEditingControllers {
   TextEditingControllers._();
@@ -27,6 +28,10 @@ class TextEditingControllers {
   final productQuantityController = TextEditingController();
   final productImageController = TextEditingController();
   final productquantityController = TextEditingController();
+
+  //Forgot password
+  final forgotpasswordController = TextEditingController();
+  final passwordResetEmailcontroller = TextEditingController();
 
   // Clear all auth-related controllers
   void clearAuthControllers() {
@@ -68,6 +73,7 @@ class TextEditingControllers {
 
   // Dispose all controllers
   void dispose() {
+
     usernameController.dispose();
     emailController.dispose();
     passwordController.dispose();
@@ -83,5 +89,6 @@ class TextEditingControllers {
     productQuantityController.dispose();
     productImageController.dispose();
     productquantityController.dispose();
+    
   }
 }
