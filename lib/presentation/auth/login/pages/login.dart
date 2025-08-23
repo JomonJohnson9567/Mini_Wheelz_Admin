@@ -104,29 +104,27 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                Center(
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          if (kDebugMode) {
-                            print("forgot password");
-                          }
-                          Navigator.push(
-                            (context),
-                            MaterialPageRoute(
-                              builder: (context) => ForgotPasswordPage(),
-                            ),
-                          );
-                        },
-                        child: const Text(
-                          'Forgot Password ?',
-                          style: TextStyle(color: AppColors.info),
-                        ),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        if (kDebugMode) {
+                          print("forgot password");
+                        }
+                        Navigator.push(
+                          (context),
+                          MaterialPageRoute(
+                            builder: (context) => ForgotPasswordPage(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Forgot Password ?',
+                        style: TextStyle(color: AppColors.info),
                       ),
-                      const SizedBox(width: 8),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(width: 8),
+                  ],
                 ),
                 const SizedBox(height: 24),
 

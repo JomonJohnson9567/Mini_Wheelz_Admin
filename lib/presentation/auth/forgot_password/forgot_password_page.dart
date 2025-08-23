@@ -1,11 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_wheelz/common/arrow_icon__ios/build_back_button.dart';
-import 'package:mini_wheelz/common/header_text/header_text.dart';
+
+import 'package:mini_wheelz/common/signup_text/sigin_header_text.dart';
 import 'package:mini_wheelz/common/text_field/custom_text_field.dart';
 import 'package:mini_wheelz/common/validation/validation_utils.dart';
 import 'package:mini_wheelz/core/controllers/textediting_controllers.dart';
 import 'package:mini_wheelz/core/theme/app_colors.dart';
+import 'package:mini_wheelz/presentation/auth/functions/reset_password.dart';
 import 'package:mini_wheelz/presentation/auth/login/pages/login.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
@@ -20,7 +23,7 @@ class ForgotPasswordPage extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [AppColors.background, AppColors.surface],
+            colors: [AppColors.whitecolor, AppColors.surface],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -35,13 +38,12 @@ class ForgotPasswordPage extends StatelessWidget {
                 children: [
                   buildBackButton(context),
                   const SizedBox(height: 20),
-                  HeaderText(title: 'Reset Your Password'),
+                  SIgnUpText(text: 'Forgot Password ?'),
                   const SizedBox(height: 25),
                   _buildIllustration(),
                   const SizedBox(height: 30),
                   _buildEmailField(),
-                  const SizedBox(height: 20),
-                  _buildPasswordField(),
+
                   const SizedBox(height: 30),
                   _buildResetButton(context),
                   const SizedBox(height: 40),
@@ -79,24 +81,12 @@ class ForgotPasswordPage extends StatelessWidget {
 
   Widget _buildEmailField() {
     return CustomTextField(
+      hintStyle: const TextStyle(color: AppColors.textHint),
       validator: ValidationUtils.validateEmail,
-      hintText: 'Enter Email',
+      hintText: 'Enter Your Email',
 
       controller: TextEditingControllers.instance.passwordResetEmailcontroller,
-      fillcolor: Colors.white,
-      hintStyle: const TextStyle(color: AppColors.textHint),
-    );
-  }
-
-  /// 🔑 Password Input
-  Widget _buildPasswordField() {
-    return CustomTextField(
-      validator: ValidationUtils.validatePassword,
-      hintText: 'Enter New Password',
-
-      controller: TextEditingControllers.instance.forgotpasswordController,
-      fillcolor: Colors.white,
-      hintStyle: const TextStyle(color: AppColors.textHint),
+      fillcolor: const Color.fromARGB(255, 17, 14, 14),
     );
   }
 
@@ -119,10 +109,11 @@ class ForgotPasswordPage extends StatelessWidget {
             print('Reset PassWord');
           }
           if (_forgotkey.currentState!.validate()) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => LoginPage()),
-            );
+            resetPassword(context);
+            // Navigator.pushReplacement(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => LoginPage()),
+            // );
           }
         },
         child: const Text("🔑 Reset Password"),
