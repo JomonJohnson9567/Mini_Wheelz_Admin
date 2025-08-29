@@ -11,10 +11,11 @@ class CategoryNameFiled extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: CustomTextField(
-        hintStyle: const TextStyle(color: AppColors.textHint),
+        hintStyle: const TextStyle(color: Color.fromARGB(255, 20, 13, 13)),
         fillcolor: const Color.fromARGB(255, 248, 246, 246),
         controller: TextEditingControllers.instance.categorynameController,
         hintText: 'Category Name',
+
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter your category Name';
