@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_wheelz/presentation/add_item/widgets/build_state_card.dart';
 import 'package:mini_wheelz/presentation/add_item/widgets/out_of_stockcard.dart';
 import 'package:mini_wheelz/presentation/category_list/pages/category_list.dart';
+import 'package:mini_wheelz/presentation/add_category/bloc/category_bloc.dart';
 
 class QuickStackItems extends StatelessWidget {
   const QuickStackItems({super.key});
@@ -38,15 +40,45 @@ class QuickStackItems extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => CategoryList()),
                     );
                   },
-                  child: buildStatCard(
-                    count: '00',
-                    label: 'Categories',
-                    icon: Icons.category_rounded,
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                  child: BlocBuilder<CategoryBloc, CategoryState>(
+                    builder: (context, state) {
+                      if (state.status == CategoryStatus.loading &&
+                          state.categories.isEmpty) {
+                        return buildStatCard(
+                          count: '—',
+                          label: 'Categories',
+                          icon: Icons.category_rounded,
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        );
+                      }
+                      if (state.status == CategoryStatus.failure) {
+                        return buildStatCard(
+                          count: '!',
+                          label: 'Categories',
+                          icon: Icons.category_rounded,
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        );
+                      }
+                      final count = state.categories.length;
+                      return buildStatCard(
+                        count: count.toString().padLeft(2, '0'),
+                        label: 'Categories',
+                        icon: Icons.category_rounded,
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
