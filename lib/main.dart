@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mini_wheelz/common/bottom_navbar/bottom_nav.dart';
 import 'package:mini_wheelz/presentation/auth/bloc/cubit/authentication_cubit.dart';
 import 'package:mini_wheelz/presentation/auth/signin/pages/signin.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         title: 'Mini Wheelz',
         theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
         home: SignUpScreen(),
+        // home: BottomNavBar(),
       ),
     );
   }

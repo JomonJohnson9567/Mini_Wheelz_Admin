@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini_wheelz/common/text_field/custom_text_field.dart';
 import 'package:mini_wheelz/core/controllers/textediting_controllers.dart';
-import 'package:mini_wheelz/core/theme/app_colors.dart';
+
 
 class CategoryNameFiled extends StatelessWidget {
   const CategoryNameFiled({super.key});

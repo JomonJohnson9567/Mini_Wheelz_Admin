@@ -36,4 +36,20 @@ class CategoryRepository {
       'createdAt': FieldValue.serverTimestamp(),
     });
   }
+
+  Future<void> updateCategory({
+    required String id,
+    required String name,
+    required String description,
+  }) async {
+    await _col.doc(id).update({
+      'name': name,
+      'description': description,
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
+  }
+
+  Future<void> deleteCategory(String id) async {
+    await _col.doc(id).delete();
+  }
 }

@@ -12,6 +12,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       super(const CategoryState.initial()) {
     on<_LoadCategories>(_onLoad);
     on<_AddCategory>(_onAdd);
+    on<_EditCategory>(_onEdit);
+    on<_DeleteCategory>(_onDelete);
     on<_SubscribeCategories>(_onSubscribe);
   }
 
@@ -48,6 +50,43 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         description: event.description,
       );
       // Optionally reload
+      add(const CategoryEvent.load());
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: CategoryStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _onEdit(_EditCategory event, Emitter<CategoryState> emit) async {
+    try {
+      await _repository.updateCategory(
+        id: event.id,
+        name: event.name,
+        description: event.description,
+      );
+      // Reload to get updated data
+      add(const CategoryEvent.load());
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: CategoryStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _onDelete(
+    _DeleteCategory event,
+    Emitter<CategoryState> emit,
+  ) async {
+    try {
+      await _repository.deleteCategory(event.id);
+      // Reload to get updated data
       add(const CategoryEvent.load());
     } catch (e) {
       emit(
