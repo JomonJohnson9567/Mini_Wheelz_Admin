@@ -36,6 +36,10 @@ class CategoryListView extends StatelessWidget {
         ),
         backgroundColor: AppColors.primary,
         elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.whitecolor),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (context, state) {

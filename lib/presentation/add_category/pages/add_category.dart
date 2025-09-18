@@ -23,68 +23,83 @@ class AddCategoryPage extends StatelessWidget {
       backgroundColor: AppColors.background,
       body: BlocProvider(
         create: (_) => CategoryBloc(repository: CategoryRepository()),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const HeaderText(title: 'Add Category'),
-                  const SizedBox(height: 20),
-                  CategoryNameFiled(),
+        child: BlocListener<CategoryBloc, CategoryState>(
+          listener: (context, state) {
+            if (state.status == CategoryStatus.success) {
+              // Clear text fields
+              TextEditingControllers.instance.clearCategoryControllers();
+              // Dismiss keyboard
+              FocusScope.of(context).unfocus();
+              // Show success message
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Category added successfully!')),
+              );
+            } else if (state.status == CategoryStatus.failure) {
+              // Show error message
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Error: ${state.errorMessage}')),
+              );
+            }
+          },
+          child: Center(
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const HeaderText(title: 'Add Category'),
+                    const SizedBox(height: 20),
+                    CategoryNameFiled(),
 
-                  const SizedBox(height: 20),
-                  DescriptionField(
-                    controller:
-                        TextEditingControllers.instance.descriptionController,
+                    const SizedBox(height: 20),
+                    DescriptionField(
+                      controller:
+                          TextEditingControllers.instance.descriptionController,
 
-                    hintText: 'Category Description',
+                      hintText: 'Category Description',
 
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter category description';
-                      }
-                      return null;
-                    },
-                  ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter category description';
+                        }
+                        return null;
+                      },
+                    ),
 
-                  const SizedBox(height: 20),
-                  Builder(
-                    builder: (innerContext) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: CustomButton(
-                        text: 'Add Category',
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            final name = TextEditingControllers
-                                .instance
-                                .categorynameController
-                                .text
-                                .trim();
-                            final description = TextEditingControllers
-                                .instance
-                                .descriptionController
-                                .text
-                                .trim();
+                    const SizedBox(height: 20),
+                    Builder(
+                      builder: (innerContext) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: CustomButton(
+                          text: 'Add Category',
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              final name = TextEditingControllers
+                                  .instance
+                                  .categorynameController
+                                  .text
+                                  .trim();
+                              final description = TextEditingControllers
+                                  .instance
+                                  .descriptionController
+                                  .text
+                                  .trim();
 
-                            innerContext.read<CategoryBloc>().add(
-                              CategoryEvent.add(
-                                name: name,
-                                description: description,
-                              ),
-                            );
-
-                            ScaffoldMessenger.of(innerContext).showSnackBar(
-                              const SnackBar(content: Text('Category saved')),
-                            );
-                          }
-                        },
-                        backgroundColor: AppColors.buttonPrimary,
+                              innerContext.read<CategoryBloc>().add(
+                                CategoryEvent.add(
+                                  name: name,
+                                  description: description,
+                                ),
+                              );
+                            }
+                          },
+                          backgroundColor: AppColors.buttonPrimary,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

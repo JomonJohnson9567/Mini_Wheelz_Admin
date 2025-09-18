@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class TextEditingControllers {
   TextEditingControllers._();
 
@@ -57,6 +55,12 @@ class TextEditingControllers {
     loginPasswordController.clear();
   }
 
+  // Clear category controllers
+  void clearCategoryControllers() {
+    categorynameController.clear();
+    descriptionController.clear();
+  }
+
   // Clear all controllers
   void clearAllControllers() {
     clearAuthControllers();
@@ -73,7 +77,6 @@ class TextEditingControllers {
 
   // Dispose all controllers
   void dispose() {
-
     usernameController.dispose();
     emailController.dispose();
     passwordController.dispose();
@@ -89,6 +92,5 @@ class TextEditingControllers {
     productQuantityController.dispose();
     productImageController.dispose();
     productquantityController.dispose();
-    
   }
 }
