@@ -21,7 +21,7 @@ class TextEditingControllers {
   final productNameController = TextEditingController();
 
   final productPriceController = TextEditingController();
-  final productproductDescriptionController = TextEditingController();
+  final productDescriptionController = TextEditingController();
   final productCategoryController = TextEditingController();
   final productQuantityController = TextEditingController();
   final productImageController = TextEditingController();
@@ -68,7 +68,7 @@ class TextEditingControllers {
     descriptionController.clear();
     productNameController.clear();
     productPriceController.clear();
-    productproductDescriptionController.clear();
+    productDescriptionController.clear();
     productCategoryController.clear();
     productQuantityController.clear();
     productImageController.clear();
@@ -87,7 +87,7 @@ class TextEditingControllers {
     descriptionController.dispose();
     productNameController.dispose();
     productPriceController.dispose();
-    productproductDescriptionController.dispose();
+    productDescriptionController.dispose();
     productCategoryController.dispose();
     productQuantityController.dispose();
     productImageController.dispose();

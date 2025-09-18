@@ -11,6 +11,9 @@ import 'package:mini_wheelz/presentation/add_product/widgets/product_price_widge
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_wheelz/presentation/add_category/bloc/category_bloc.dart';
 import 'package:mini_wheelz/core/repositories/category_repository.dart';
+import 'package:mini_wheelz/presentation/add_product/bloc/product_bloc.dart';
+import 'package:mini_wheelz/core/repositories/product_repository.dart';
+import 'package:mini_wheelz/core/controllers/textediting_controllers.dart';
 
 final GlobalKey<FormState> addProductFormKey = GlobalKey<FormState>();
 
@@ -23,39 +26,85 @@ class AddProductPage extends StatelessWidget {
       resizeToAvoidBottomInset: true, // very important
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: BlocProvider(
-          create: (_) =>
-              CategoryBloc(repository: CategoryRepository())
-                ..add(const CategoryEvent.load()),
-          child: SingleChildScrollView(
-            // Adjust bottom padding dynamically when keyboard opens
-            padding: EdgeInsets.only(
-              left: 16,
-              right: 16,
-              bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) =>
+                  CategoryBloc(repository: CategoryRepository())
+                    ..add(const CategoryEvent.load()),
             ),
-            child: Form(
-              key: addProductFormKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 40),
-                  const HeaderText(title: 'Add Product'),
-                  const SizedBox(height: 20),
-                  const ImageGridColumn(),
-                  const SizedBox(height: 10),
-                  DividerWidget(color: AppColors.divider),
-                  const SizedBox(height: 10),
-                  const ProductPriceWidget(),
-                  const SizedBox(height: 10),
-                  const ProductPriceAndQTYWidget(),
-                  const SizedBox(height: 10),
-                  const CategorySelectionWidget(),
-                  const SizedBox(height: 20),
-                  const DescriptionWidget(),
-                  const SizedBox(height: 20),
-                  const ButtonWidget(),
-                ],
+            BlocProvider(
+              create: (_) => ProductBloc(repository: ProductRepository()),
+            ),
+          ],
+          child: BlocListener<ProductBloc, ProductState>(
+            listener: (context, state) {
+              if (state.status == ProductStatus.loading) {
+                showDialog<void>(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (ctx) =>
+                      const Center(child: CircularProgressIndicator()),
+                );
+              } else if (state.status == ProductStatus.success) {
+                Navigator.of(context, rootNavigator: true).maybePop();
+                TextEditingControllers.instance.productNameController.clear();
+                TextEditingControllers.instance.productPriceController.clear();
+                TextEditingControllers.instance.productQuantityController
+                    .clear();
+                TextEditingControllers.instance.productDescriptionController
+                    .clear();
+                TextEditingControllers.instance.productCategoryController
+                    .clear();
+                context.read<ProductBloc>().add(const ProductReset());
+                ScaffoldMessenger.of(context)
+                  ..removeCurrentSnackBar()
+                  ..showSnackBar(
+                    const SnackBar(content: Text('Product added')),
+                  );
+              } else if (state.status == ProductStatus.error) {
+                Navigator.of(context, rootNavigator: true).maybePop();
+                ScaffoldMessenger.of(context)
+                  ..removeCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        state.errorMessage ?? 'Failed to add product',
+                      ),
+                    ),
+                  );
+              }
+            },
+            child: SingleChildScrollView(
+              // Adjust bottom padding dynamically when keyboard opens
+              padding: EdgeInsets.only(
+                left: 16,
+                right: 16,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+              ),
+              child: Form(
+                key: addProductFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 40),
+                    const HeaderText(title: 'Add Product'),
+                    const SizedBox(height: 20),
+                    const ImageGridColumn(),
+                    const SizedBox(height: 10),
+                    DividerWidget(color: AppColors.divider),
+                    const SizedBox(height: 10),
+                    const ProductPriceWidget(),
+                    const SizedBox(height: 10),
+                    const ProductPriceAndQTYWidget(),
+                    const SizedBox(height: 10),
+                    const CategorySelectionWidget(),
+                    const SizedBox(height: 20),
+                    const DescriptionWidget(),
+                    const SizedBox(height: 20),
+                    const ButtonWidget(),
+                  ],
+                ),
               ),
             ),
           ),

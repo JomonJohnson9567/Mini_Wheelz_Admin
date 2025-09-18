@@ -10,6 +10,7 @@ class ProductPriceField extends StatefulWidget {
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
   final int? maxLines;
+  final ValueChanged<String>? onChanged;
 
   const ProductPriceField({
     super.key,
@@ -22,6 +23,7 @@ class ProductPriceField extends StatefulWidget {
     this.validator,
     this.width,
     this.maxLines,
+    this.onChanged,
   });
 
   @override
@@ -49,6 +51,7 @@ class _ProductPriceFieldState extends State<ProductPriceField> {
         maxLines: widget.isPassword ? 1 : (widget.maxLines ?? 1),
         style: const TextStyle(color: Color.fromARGB(255, 22, 17, 17)),
         validator: widget.validator,
+        onChanged: widget.onChanged,
 
         decoration: InputDecoration(
           hintText: widget.hintText,

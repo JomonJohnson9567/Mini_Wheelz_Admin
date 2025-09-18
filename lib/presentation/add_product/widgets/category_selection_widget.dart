@@ -5,6 +5,7 @@ import 'package:mini_wheelz/core/theme/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_wheelz/presentation/add_category/bloc/category_bloc.dart';
 import 'package:mini_wheelz/core/repositories/category_repository.dart';
+import 'package:mini_wheelz/presentation/add_product/bloc/product_bloc.dart';
 
 class CategorySelectionWidget extends StatelessWidget {
   const CategorySelectionWidget({super.key});
@@ -32,6 +33,15 @@ class CategorySelectionWidget extends StatelessWidget {
                 return 'Please select product category';
               }
               return null;
+            },
+            onChanged: (value) {
+              final idx = items.indexOf(value ?? '');
+              final categoryId = idx >= 0 && idx < state.categories.length
+                  ? state.categories[idx].id
+                  : '';
+              context.read<ProductBloc>().add(
+                ProductFieldChanged(categoryId: categoryId),
+              );
             },
           ),
         );

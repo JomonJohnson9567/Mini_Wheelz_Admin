@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mini_wheelz/common/text_field/product_price_field.dart/product_price_field.dart';
 import 'package:mini_wheelz/core/controllers/textediting_controllers.dart';
 import 'package:mini_wheelz/core/theme/app_colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mini_wheelz/presentation/add_product/bloc/product_bloc.dart';
 
 class ProductPriceAndQTYWidget extends StatelessWidget {
   const ProductPriceAndQTYWidget({super.key});
@@ -27,6 +29,12 @@ class ProductPriceAndQTYWidget extends StatelessWidget {
                 }
                 return null;
               },
+              onChanged: (value) {
+                final parsed = double.tryParse(value) ?? 0;
+                context.read<ProductBloc>().add(
+                  ProductFieldChanged(price: parsed),
+                );
+              },
             ),
           ),
           const SizedBox(width: 10),
@@ -44,6 +52,12 @@ class ProductPriceAndQTYWidget extends StatelessWidget {
                   return 'Please enter product quantity';
                 }
                 return null;
+              },
+              onChanged: (value) {
+                final parsed = int.tryParse(value) ?? 0;
+                context.read<ProductBloc>().add(
+                  ProductFieldChanged(quantity: parsed),
+                );
               },
             ),
           ),

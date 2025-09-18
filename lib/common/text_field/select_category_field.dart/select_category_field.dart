@@ -12,6 +12,7 @@ class SelectCategoryField extends StatefulWidget {
   final String? Function(String?)? validator;
   final int? maxLines;
   final List<String>? dropdownItems;
+  final ValueChanged<String?>? onChanged;
 
   const SelectCategoryField({
     super.key,
@@ -23,6 +24,7 @@ class SelectCategoryField extends StatefulWidget {
     this.validator,
     this.maxLines,
     this.dropdownItems,
+    this.onChanged,
   });
 
   @override
@@ -92,7 +94,7 @@ class _SelectCategoryFieldState extends State<SelectCategoryField> {
                     ),
                   ),
                   const SizedBox(height: 8),
-               
+
                   Expanded(
                     child: filtered.isEmpty
                         ? Center(
@@ -166,6 +168,7 @@ class _SelectCategoryFieldState extends State<SelectCategoryField> {
       setState(() {
         widget.controller.text = selected;
       });
+      widget.onChanged?.call(selected);
       // Ensure the field loses focus so the sheet closes cleanly
       FocusScope.of(context).unfocus();
     }

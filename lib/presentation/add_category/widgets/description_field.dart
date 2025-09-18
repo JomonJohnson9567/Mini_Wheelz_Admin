@@ -7,11 +7,13 @@ class DescriptionField extends StatelessWidget {
   final String hintText;
 
   final String? Function(String?)? validator;
+  final ValueChanged<String>? onChanged;
   const DescriptionField({
     required this.controller,
     required this.hintText,
 
     required this.validator,
+    this.onChanged,
     super.key,
   });
 
@@ -23,6 +25,7 @@ class DescriptionField extends StatelessWidget {
         controller: controller,
         maxLines: 5,
         validator: validator,
+        onChanged: onChanged,
         scrollPadding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom + 100,
         ),
